@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Only Mine 🖤</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap');
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
+<style>
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -21,6 +21,25 @@ body {
     text-align: center;
 }
 
+/* Overlay */
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, #200015, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+}
+#overlay h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+}
+#overlay p {
+    opacity: 0.8;
+}
+
 /* Pages */
 .page {
     display: none;
@@ -32,7 +51,7 @@ body {
 
 h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.4em;
+    font-size: 2.3em;
     margin-bottom: 15px;
 }
 p {
@@ -80,7 +99,7 @@ img {
     box-shadow: 0 0 30px rgba(255,0,80,0.3);
 }
 
-/* Heart Confetti */
+/* Hearts */
 .heart {
     position: fixed;
     color: #ff2e63;
@@ -103,7 +122,15 @@ img {
 
 <body>
 
-<!-- Background Music -->
+<!-- TAP TO ENTER OVERLAY -->
+<div id="overlay">
+    <div>
+        <h1>Tap to Enter 🖤</h1>
+        <p>I have something for you…</p>
+    </div>
+</div>
+
+<!-- MUSIC -->
 <audio id="bgMusic" loop>
     <source src="lovemelikeyoudo.mp3" type="audio/mpeg">
 </audio>
@@ -111,11 +138,7 @@ img {
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
     <h1>Come Closer 🖤</h1>
-    <p>
-        I don’t believe in coincidences.<br>
-        I believe in *us*.
-    </p>
-    <p> DON'T SAY NO. UNIVERSE IS GONNA STOP YOU.</p> 
+    <p>I don’t believe in coincidences.<br>I believe in us.</p>
     <p>Will you be my Valentine?</p>
 
     <div class="btn-box">
@@ -127,10 +150,7 @@ img {
 <!-- PAGE 2 -->
 <div class="page" id="page2">
     <h1>You Chose Me 😈</h1>
-    <p>
-        Loving you is my favorite obsession.<br>
-        Tell me…
-    </p>
+    <p>Loving you is my favorite obsession.</p>
     <p>Do you love me?</p>
 
     <div class="btn-box">
@@ -143,27 +163,31 @@ img {
 <div class="page" id="page3">
     <h1>Forever Bound 🖤</h1>
     <p>
-        You’re my darkness and my light.<br>
+        You are my darkness and my light.<br>
         My chaos and my calm.<br>
-        My favorite forever.<br>
-        You are My Miss Dumbo Doll.
+        My always.<br>
+        MY MISS DUMBO DOLL
     </p>
 
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHlwdjk4MmhocXgwZ3VseDhpY29oc241YmhueHozaXgyM3NkYmFvNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/kgZugAf6V8XEk/giphy.gif">
 
     <p style="margin-top:20px;">
         I don’t want a perfect love.<br>
-        I want *ours*. 🖤
+        I want ours. 🖤
     </p>
 </div>
 
 <script>
-/* Music autoplay after interaction */
-document.body.addEventListener("click", () => {
-    document.getElementById("bgMusic").play();
-}, { once: true });
+const music = document.getElementById("bgMusic");
+const overlay = document.getElementById("overlay");
 
-/* Page navigation */
+/* Start music on first tap */
+overlay.addEventListener("click", () => {
+    music.play();
+    overlay.style.display = "none";
+});
+
+/* Page switch */
 function nextPage(n) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page'+n).classList.add('active');
@@ -171,8 +195,8 @@ function nextPage(n) {
 
 /* Runaway NO buttons */
 function move(btn) {
-    btn.style.left = Math.random()*250 + "px";
-    btn.style.top = Math.random()*90 + "px";
+    btn.style.left = Math.random() * 250 + "px";
+    btn.style.top = Math.random() * 90 + "px";
 }
 
 ["no1","no2"].forEach(id => {
@@ -181,20 +205,17 @@ function move(btn) {
     btn.addEventListener("touchstart", () => move(btn));
 });
 
-/* Heart Confetti Generator */
+/* Heart confetti */
 setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (14 + Math.random()*20) + "px";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random() * 20) + "px";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 6000);
 }, 300);
 </script>
 
 </body>
 </html>
-
-
