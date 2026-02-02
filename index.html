@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Only Mine 🖤</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #1a001f, #000);
+    height: 100vh;
+    overflow: hidden;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Pages */
+.page {
+    display: none;
+    width: 90%;
+    max-width: 420px;
+    animation: fade 0.8s ease;
+}
+.page.active { display: block; }
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4em;
+    margin-bottom: 15px;
+}
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Buttons */
+.btn-box {
+    position: relative;
+    height: 160px;
+    margin-top: 30px;
+}
+
+button {
+    border: none;
+    padding: 14px 32px;
+    font-size: 1.05em;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.yes {
+    background: linear-gradient(135deg, #ff0844, #ff416c);
+    color: white;
+    box-shadow: 0 0 25px rgba(255,65,108,0.6);
+}
+.yes:hover {
+    transform: scale(1.15);
+}
+
+.no {
+    background: #111;
+    color: #ff6b81;
+    border: 1px solid #ff6b81;
+    position: absolute;
+}
+
+/* Images */
+img {
+    width: 100%;
+    border-radius: 18px;
+    margin-top: 25px;
+    box-shadow: 0 0 30px rgba(255,0,80,0.3);
+}
+
+/* Heart Confetti */
+.heart {
+    position: fixed;
+    color: #ff2e63;
+    font-size: 18px;
+    animation: float 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(1); }
+    100% { transform: translateY(-10vh) scale(1.5); }
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>Come Closer 🖤</h1>
+    <p>
+        I don’t believe in coincidences.<br>
+        I believe in *us*.
+    </p>
+    <p>Will you be my Valentine?</p>
+
+    <div class="btn-box">
+        <button class="yes" onclick="nextPage(2)">YES, I’M YOURS 🖤</button>
+        <button class="no" id="no1">NO</button>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>You Chose Me 😈</h1>
+    <p>
+        Loving you is my favorite obsession.<br>
+        Tell me…
+    </p>
+    <p>Do you love me?</p>
+
+    <div class="btn-box">
+        <button class="yes" onclick="nextPage(3)">I LOVE YOU 🖤</button>
+        <button class="no" id="no2">I DON’T</button>
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+    <h1>Forever Bound 🖤</h1>
+    <p>
+        You’re my darkness and my light.<br>
+        My chaos and my calm.<br>
+        My favorite forever.
+    </p>
+
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+
+    <p style="margin-top:20px;">
+        I don’t want a perfect love.<br>
+        I want *ours*. 🖤
+    </p>
+</div>
+
+<script>
+/* Music autoplay after interaction */
+document.body.addEventListener("click", () => {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+
+/* Page navigation */
+function nextPage(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page'+n).classList.add('active');
+}
+
+/* Runaway NO buttons */
+function move(btn) {
+    btn.style.left = Math.random()*250 + "px";
+    btn.style.top = Math.random()*90 + "px";
+}
+
+["no1","no2"].forEach(id => {
+    const btn = document.getElementById(id);
+    btn.addEventListener("mouseover", () => move(btn));
+    btn.addEventListener("touchstart", () => move(btn));
+});
+
+/* Heart Confetti Generator */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (14 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
